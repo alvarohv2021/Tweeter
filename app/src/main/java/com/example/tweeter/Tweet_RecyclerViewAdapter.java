@@ -70,7 +70,7 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
             super(itemView);
 
             idView = itemView.findViewById(R.id.id);
-            imagenPerfil = itemView.findViewById(R.id.imageView);
+            imagenPerfil = itemView.findViewById(R.id.homeImagenCabezeraView);
             nombreUsuario = itemView.findViewById(R.id.nombreUsuario);
             cuadroTexto = itemView.findViewById(R.id.cuadroTexto);
             fechaTweetView = itemView.findViewById(R.id.fechaTweetView);

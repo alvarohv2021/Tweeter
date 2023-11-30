@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Tweeter"
         tools:targetApi="31">
         <activity
+            android:name=".profile_page"
+            android:exported="false" />
+        <activity
             android:name=".homePage"
             android:exported="false" />
         <activity

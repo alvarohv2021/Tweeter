@@ -29,7 +29,7 @@
                 app:strokeColor="@android:color/transparent">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/homeImagenCabezeraView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/perfil1"></ImageView>

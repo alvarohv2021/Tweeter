@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -16,12 +17,19 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
     private GeneraciónListaTweets generaciónListaTweets;
     private FloatingActionButton añadirTweet;
     private int idUsuario;
+    private ImageView perfilCabezeraView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        perfilCabezeraView.setOnClickListener(v -> {
+            Intent intent = new Intent(homePage.this, profile_page.class);
+            intent.putExtra("idUsuario", 0);
+        });
+
 
         generaciónListaTweets = new GeneraciónListaTweets();
         generaciónListaTweets.generarListaTweets();
@@ -32,6 +40,7 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //Esto envia el id del usuario para añadirlo al nuevo tweet
         añadirTweet = findViewById(R.id.añadirTweetButton);
         añadirTweet.setOnClickListener(v -> {
             idUsuario = getContenidoIntent();
