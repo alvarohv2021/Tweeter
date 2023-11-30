@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "14318252592",
+    "project_id": "tweeter-a5fd2",
+    "storage_bucket": "tweeter-a5fd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14318252592:android:e39cffb33fcea14f5af3f5",
+        "android_client_info": {
+          "package_name": "com.example.tweeter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNJcxnUe6km9bLGpFwmacfOvhLyGyiuM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
