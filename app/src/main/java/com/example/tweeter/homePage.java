@@ -18,6 +18,8 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
     private FloatingActionButton añadirTweet;
     private int idUsuario;
     private MaterialCardView perfilCabezeraView;
+    private ArrayList<Tweet> listaTweets;
+    private RecyclerView recyclerView;
 
 
     @Override
@@ -25,10 +27,10 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        GeneracionListaTweets generarListaTweets = new GeneracionListaTweets();
-        ArrayList<Tweet> listaTweets =  generarListaTweets.generarListaTweets();
+        generacionListaTweets = new GeneracionListaTweets();
+        listaTweets = generacionListaTweets.generarListaTweets();
 
-        RecyclerView recyclerView = findViewById(R.id.tweet_list_recycler);
+        recyclerView = findViewById(R.id.tweet_list_recycler);
         tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), listaTweets);
 
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
@@ -38,13 +40,12 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         añadirTweet = findViewById(R.id.añadirTweetButton);
         añadirTweet.setOnClickListener(v -> {
             idUsuario = getContenidoIntent();
-            AddTweetContent addTweetContent = new AddTweetContent(idUsuario);
+            AddTweetContent addTweetContent = new AddTweetContent(listaTweets.size() + 1, idUsuario);
             addTweetContent.show(getSupportFragmentManager(), "");
         });
 
         // Esta parte haze de la imágen de perfil de usuario, un botón que inicia una activity "profile_page.java"
         perfilCabezeraView = findViewById(R.id.homeImagenCabezeraView);
-
         perfilCabezeraView.setOnClickListener(v -> {
             Intent intent = new Intent(homePage.this, profile_page.class);
             intent.putExtra("listaTweets", listaTweets);

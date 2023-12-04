@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class GeneracionListaTweets {
     ArrayList<Tweet> listaTweets = new ArrayList<>();
-    ArrayList<Tweet> tweetsUsuario = new ArrayList<>();
     String nombreUsuario;
     int imagenPerfil;
 
@@ -38,19 +37,9 @@ public class GeneracionListaTweets {
                     imagenPerfil = R.drawable.perfil_default;
             }
 
-            listaTweets.add(new Tweet(idUsuario, nombreUsuario, "Este es el Tweet #" + i, fecha, imagenPerfil));
+            listaTweets.add(new Tweet(i, idUsuario, nombreUsuario, "Este es el Tweet #" + i, fecha, imagenPerfil));
         }
         return listaTweets;
-    }
-
-    public ArrayList<Tweet> getListaTweetsUsuario(int idUsuario) {
-
-        for (Tweet tweet : listaTweets) {
-            if (tweet.getIdUsuario() == idUsuario) {
-                tweetsUsuario.add(tweet);
-            }
-        }
-        return tweetsUsuario;
     }
 
     public void remove(int position) {

@@ -28,7 +28,7 @@
                 app:strokeColor="@android:color/transparent">
 
                 <ImageView
-                    android:id="@+id/perfilImagenCabezeraView"
+                    android:id="@+id/imagenCabezeraProfilePageView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/perfil0"></ImageView>
