@@ -13,12 +13,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_RecyclerViewAdapter.MyViewHolder> {
     private Context context;
-    private GeneraciónListaTweets generaciónListaTweets;
+    private ArrayList<Tweet> generaciónListaTweets;
     private añadirTweets listener;
 
-    public Tweet_RecyclerViewAdapter(Context context, GeneraciónListaTweets generaciónListaTweets) {
+    public Tweet_RecyclerViewAdapter(Context context, ArrayList<Tweet> generaciónListaTweets) {
         this.context = context;
         this.generaciónListaTweets = generaciónListaTweets;
         this.listener = listener;
@@ -35,7 +37,7 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Tweet tweet = generaciónListaTweets.getTwit(position);
+        Tweet tweet = generaciónListaTweets.get(position);
         holder.idView.setText(tweet.getIdUsuario()+"");
         holder.imagenPerfil.setImageResource(tweet.getImagenPerfil());
         holder.nombreUsuario.setText(tweet.getNombre());
@@ -53,7 +55,7 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
 
     @Override
     public int getItemCount() {
-        return generaciónListaTweets.getSize();
+        return generaciónListaTweets.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

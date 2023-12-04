@@ -1,8 +1,9 @@
 package com.example.tweeter;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tweet {
+public class Tweet implements Serializable {
     private int idUsuario;
     private String nombreUsuario;
     private String contenido;

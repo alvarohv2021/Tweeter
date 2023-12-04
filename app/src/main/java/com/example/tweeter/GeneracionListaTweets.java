@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class GeneraciónListaTweets {
+public class GeneracionListaTweets {
     ArrayList<Tweet> listaTweets = new ArrayList<>();
+    ArrayList<Tweet> tweetsUsuario = new ArrayList<>();
     String nombreUsuario;
     int imagenPerfil;
 
-    public void generarListaTweets() {
+    public ArrayList<Tweet> generarListaTweets() {
         for (int i = 0; i < 20; i++) {
             int idUsuario = i % 4;  // ID de usuario cíclico entre 0, 1, 2 y 3
             LocalDateTime fechaTweet = LocalDateTime.now();
@@ -39,14 +40,17 @@ public class GeneraciónListaTweets {
 
             listaTweets.add(new Tweet(idUsuario, nombreUsuario, "Este es el Tweet #" + i, fecha, imagenPerfil));
         }
+        return listaTweets;
     }
 
-    public void mostrarListaTweetsUsuario(int idUsuario) {
+    public ArrayList<Tweet> getListaTweetsUsuario(int idUsuario) {
+
         for (Tweet tweet : listaTweets) {
             if (tweet.getIdUsuario() == idUsuario) {
-                System.out.println(tweet);
+                tweetsUsuario.add(tweet);
             }
         }
+        return tweetsUsuario;
     }
 
     public void remove(int position) {

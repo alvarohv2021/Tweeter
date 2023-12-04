@@ -13,7 +13,7 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+9
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="75dp"
@@ -22,6 +22,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/homeImagenCabezeraView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -31,7 +32,6 @@
                 app:strokeColor="@android:color/transparent">
 
                 <ImageView
-                    android:id="@+id/homeImagenCabezeraView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/perfil0"></ImageView>
