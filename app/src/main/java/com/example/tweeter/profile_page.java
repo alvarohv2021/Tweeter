@@ -15,27 +15,35 @@ import java.util.ArrayList;
 public class profile_page extends AppCompatActivity {
     private Tweet_RecyclerViewAdapter tweet_recyclerViewAdapter;
     private ImageView imagenCabezeraProfilePage;
+    private ArrayList<Tweet> listaTweets;
+    private ArrayList<Tweet> tweetsUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
+        tweetsUsuario = getListaTweetsByUser(getContenidoIntent(), 0);
+        listaTweets = getContenidoIntent();
 
-        imagenCabezeraProfilePage = findViewById(R.id.imagenCabezeraProfilePageView);
-        imagenCabezeraProfilePage.setOnClickListener(v -> {
-            Intent intent = new Intent(profile_page.this, homePage.class);
-            intent.putExtra("listaTweets", listaTweets);
-            startActivity(intent);
-        });
-
-        ArrayList<Tweet> tweetsUsuario = getListaTweetsByUser(getContenidoIntent(), 0);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewProfilePage);
         tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), tweetsUsuario);
 
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        imagenCabezeraProfilePage = findViewById(R.id.imagenCabezeraProfilePageView);
+        imagenCabezeraProfilePage.setOnClickListener(v -> {
+
+            tweetsUsuario = tweet_recyclerViewAdapter.getListaTweetsRecyclerView();
+            listaTweets = fetchArrayLists(listaTweets, tweetsUsuario);
+
+            Intent intent = new Intent(profile_page.this, homePage.class);
+            intent.putExtra("listaTweets", listaTweets);
+            startActivity(intent);
+        });
     }
 
     public ArrayList<Tweet> getContenidoIntent() {
@@ -57,4 +65,15 @@ public class profile_page extends AppCompatActivity {
         return tweetsPropios;
     }
 
+    public ArrayList<Tweet> fetchArrayLists(ArrayList<Tweet> listaTweets, ArrayList<Tweet> tweetsUsuario) {
+
+        for (int i = 0; i < listaTweets.size(); i++) {
+            if (listaTweets.get(i).getIdUsuario() == 0 && !tweetsUsuario.contains(listaTweets.get(i))) {
+                listaTweets.remove(i);
+            }
+
+
+        }
+        return listaTweets;
+    }
 }
