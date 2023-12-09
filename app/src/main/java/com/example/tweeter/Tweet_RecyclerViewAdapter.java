@@ -91,7 +91,6 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
         private TextView cuadroTexto;
         private TextView fechaTweetView;
         private CheckBox botonLike;
-        private Button botonAñadirTweet;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

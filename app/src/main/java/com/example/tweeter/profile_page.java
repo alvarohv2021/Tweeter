@@ -33,7 +33,7 @@ public class profile_page extends AppCompatActivity {
 
         botonCambiarOrden = findViewById(R.id.botonCambiarOrdenPerfil);
         botonCambiarOrden.setOnClickListener(v -> {
-            // Llama al método en el adaptador para cambiar el orden
+            // Llama al método en el adaptador para cambiar el orden en el que se muestran los Tweets
             tweet_recyclerViewAdapter.cambiarOrden();
             if (botonCambiarOrden.getText().toString().equals("Ascendente")) {
                 botonCambiarOrden.setText("Descendente");

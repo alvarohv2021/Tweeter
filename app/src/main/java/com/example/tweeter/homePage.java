@@ -57,9 +57,10 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Esto envia el id del usuario para añadirlo al nuevo tweet-----------------------------------
+        //En esta funcionalidad se añaden tweets nuevos al recyclñer view----------------------------------
         añadirTweet = findViewById(R.id.añadirTweetButton);
         añadirTweet.setOnClickListener(v -> {
+            //Se recibe el contenido que se envio a traves del Intent de MainActivity.java (el id del usuario)
             idUsuario = getContenidoIntentRegister();
             AddTweetContent addTweetContent = new AddTweetContent(listaTweets.size() + 1, idUsuario);
             addTweetContent.show(getSupportFragmentManager(), "");

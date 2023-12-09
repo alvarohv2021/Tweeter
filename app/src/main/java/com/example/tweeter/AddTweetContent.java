@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AddTweetContent extends AppCompatDialogFragment {
@@ -37,8 +35,6 @@ public class AddTweetContent extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.upload_tweet_content, null);
 
         viewContenidoTweet = view.findViewById(R.id.viewContenidoTweet);
-
-        Log.d("Hola", "Hola mundo desde el listener");
 
         builder.setView(view).setPositiveButton("Upload", (dialogInterface, i) -> {
 
