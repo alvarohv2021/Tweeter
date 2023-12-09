@@ -6,18 +6,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 
 public class homePage extends AppCompatActivity implements AñadirTweetARecyclerView {
     private Tweet_RecyclerViewAdapter tweet_recyclerViewAdapter;
-    private GeneraciónListaTweets generaciónListaTweets;
+    private GeneracionListaTweets generacionListaTweets;
     private FloatingActionButton añadirTweet;
     private int idUsuario;
-    private ImageView perfilCabezeraView;
+    private MaterialCardView perfilCabezeraView;
+    private ArrayList<Tweet> listaTweets;
+    private RecyclerView recyclerView;
 
 
     @Override
@@ -25,17 +29,17 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        perfilCabezeraView.setOnClickListener(v -> {
-            Intent intent = new Intent(homePage.this, profile_page.class);
-            intent.putExtra("idUsuario", 0);
-        });
+        generacionListaTweets = new GeneracionListaTweets();
 
 
-        generaciónListaTweets = new GeneraciónListaTweets();
-        generaciónListaTweets.generarListaTweets();
+        if (getContenidoIntentPerfil() == null){
+            listaTweets = generacionListaTweets.generarListaTweets();
+        }else {
+            listaTweets = getContenidoIntentPerfil();
+        }
 
-        RecyclerView recyclerView = findViewById(R.id.tweet_list_recycler);
-        tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), generaciónListaTweets);
+        recyclerView = findViewById(R.id.tweet_list_recycler);
+        tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), listaTweets);
 
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,22 +47,50 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         //Esto envia el id del usuario para añadirlo al nuevo tweet
         añadirTweet = findViewById(R.id.añadirTweetButton);
         añadirTweet.setOnClickListener(v -> {
-            idUsuario = getContenidoIntent();
-            AddTweetContent addTweetContent = new AddTweetContent(idUsuario);
+            idUsuario = getContenidoIntentRegister();
+            AddTweetContent addTweetContent = new AddTweetContent(listaTweets.size() + 1, idUsuario);
             addTweetContent.show(getSupportFragmentManager(), "");
+        });
+
+        // Esta parte haze de la imágen de perfil de usuario, un botón que inicia una activity "profile_page.java"
+        perfilCabezeraView = findViewById(R.id.homeImagenCabezeraView);
+        perfilCabezeraView.setOnClickListener(v -> {
+            Intent intent = new Intent(homePage.this, profile_page.class);
+            intent.putExtra("listaTweets", listaTweets);
+            startActivity(intent);
         });
     }
 
+    /*public void onResume() {
+        super.onResume();
+        //Esto detecta si se le ha pasado una lista de Tweets por el perfil, y si es el caso, DEBERIA mostrarla
+        listaTweets = getContenidoIntentPerfil();
+
+        tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), listaTweets);
+
+        recyclerView.setAdapter(tweet_recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+    }*/
+
     @Override
     public void añadirTweetARecyclerView(Tweet tweet) {
-        generaciónListaTweets.addTweet(tweet);
+        generacionListaTweets.addTweet(tweet);
         tweet_recyclerViewAdapter.notifyDataSetChanged();
     }
 
-    public int getContenidoIntent() {
+    public int getContenidoIntentRegister() {
         Intent intent = getIntent();
         int idUsuario = intent.getIntExtra("usuario", -1);
 
         return idUsuario;
+    }
+
+    public ArrayList<Tweet> getContenidoIntentPerfil() {
+        Intent intent = getIntent();
+        ArrayList<Tweet> listaTweetsPerfil = (ArrayList<Tweet>) intent.getSerializableExtra("listaTweets");
+
+        return listaTweetsPerfil;
     }
 }

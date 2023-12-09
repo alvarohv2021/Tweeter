@@ -18,16 +18,16 @@ public class AddTweetContent extends AppCompatDialogFragment {
 
     public EditText viewContenidoTweet;
     private AñadirTweetARecyclerView añadirTweetARecyclerView;
+    private int idUsuario;
+    private int idTweet;
 
-    private int id;
-
-    public AddTweetContent(int id) {
-        this.id = id;
+    public AddTweetContent(int idTweet, int idUsuario) {
+        this.idTweet = idTweet;
+        this.idUsuario = idUsuario;
     }
 
 
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -41,10 +41,11 @@ public class AddTweetContent extends AppCompatDialogFragment {
         builder.setView(view).setPositiveButton("Upload", (dialogInterface, i) -> {
 
             String contenidoTweet = viewContenidoTweet.getText().toString();
+
             //Fecha de creación del Tweet
             java.util.Date fechaAhora = java.util.Date.from(LocalDateTime.now().atZone(java.time.ZoneId.systemDefault()).toInstant());
 
-            Tweet tweet = new Tweet(this.id, "Alvaro", contenidoTweet, fechaAhora, R.drawable.perfil0);
+            Tweet tweet = new Tweet(this.idTweet, this.idUsuario, "Alvaro", contenidoTweet, fechaAhora, R.drawable.perfil0);
             añadirTweetARecyclerView.añadirTweetARecyclerView(tweet);
         });
 

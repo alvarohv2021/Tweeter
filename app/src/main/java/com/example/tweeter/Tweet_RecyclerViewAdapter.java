@@ -13,14 +13,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_RecyclerViewAdapter.MyViewHolder> {
     private Context context;
-    private GeneraciónListaTweets generaciónListaTweets;
+    private ArrayList<Tweet> listaTweets;
     private añadirTweets listener;
 
-    public Tweet_RecyclerViewAdapter(Context context, GeneraciónListaTweets generaciónListaTweets) {
+    public Tweet_RecyclerViewAdapter(Context context, ArrayList<Tweet> listaTweets) {
         this.context = context;
-        this.generaciónListaTweets = generaciónListaTweets;
+        this.listaTweets = listaTweets;
         this.listener = listener;
     }
 
@@ -35,7 +37,7 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Tweet tweet = generaciónListaTweets.getTwit(position);
+        Tweet tweet = listaTweets.get(position);
         holder.idView.setText(tweet.getIdUsuario()+"");
         holder.imagenPerfil.setImageResource(tweet.getImagenPerfil());
         holder.nombreUsuario.setText(tweet.getNombre());
@@ -53,7 +55,7 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
 
     @Override
     public int getItemCount() {
-        return generaciónListaTweets.getSize();
+        return listaTweets.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -77,12 +79,15 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
             botonLike = itemView.findViewById(R.id.like);
 
             itemView.setOnLongClickListener(view -> {
-                generaciónListaTweets.remove(this.getAdapterPosition());
+                listaTweets.remove(this.getAdapterPosition());
 
                 // Sin "notifyDataSetChanged()" la lista no se actualizara.
                 notifyDataSetChanged();
                 return true;
             });
         }
+    }
+    public ArrayList<Tweet> getListaTweetsRecyclerView(){
+        return listaTweets;
     }
 }
