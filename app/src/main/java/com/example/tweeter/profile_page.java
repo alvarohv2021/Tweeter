@@ -28,7 +28,7 @@ public class profile_page extends AppCompatActivity {
 
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewProfilePage);
-        tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), tweetsUsuario);
+        tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), tweetsUsuario, true);
 
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

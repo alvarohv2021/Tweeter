@@ -19,11 +19,17 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
     private Context context;
     private ArrayList<Tweet> listaTweets;
     private añadirTweets listener;
+    public boolean formProfile_page;
 
     public Tweet_RecyclerViewAdapter(Context context, ArrayList<Tweet> listaTweets) {
         this.context = context;
         this.listaTweets = listaTweets;
-        this.listener = listener;
+    }
+
+    public Tweet_RecyclerViewAdapter(Context context, ArrayList<Tweet> listaTweets, boolean formProfile_page) {
+        this.context = context;
+        this.listaTweets = listaTweets;
+        this.formProfile_page = formProfile_page;
     }
 
     @NonNull
@@ -38,7 +44,7 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Tweet tweet = listaTweets.get(position);
-        holder.idView.setText(tweet.getIdUsuario()+"");
+        holder.idView.setText(tweet.getIdUsuario() + "");
         holder.imagenPerfil.setImageResource(tweet.getImagenPerfil());
         holder.nombreUsuario.setText(tweet.getNombre());
         holder.cuadroTexto.setText(tweet.getContenido());
@@ -51,6 +57,15 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
             }
         });
 
+        if (formProfile_page) {
+            holder.itemView.setOnLongClickListener(view -> {
+                listaTweets.remove(position);
+
+                // Sin "notifyDataSetChanged()" la lista no se actualizara.
+                notifyDataSetChanged();
+                return true;
+            });
+        }
     }
 
     @Override
@@ -77,17 +92,10 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
             cuadroTexto = itemView.findViewById(R.id.cuadroTexto);
             fechaTweetView = itemView.findViewById(R.id.fechaTweetView);
             botonLike = itemView.findViewById(R.id.like);
-
-            itemView.setOnLongClickListener(view -> {
-                listaTweets.remove(this.getAdapterPosition());
-
-                // Sin "notifyDataSetChanged()" la lista no se actualizara.
-                notifyDataSetChanged();
-                return true;
-            });
         }
     }
-    public ArrayList<Tweet> getListaTweetsRecyclerView(){
+
+    public ArrayList<Tweet> getListaTweetsRecyclerView() {
         return listaTweets;
     }
 }
