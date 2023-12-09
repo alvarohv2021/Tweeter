@@ -18,8 +18,9 @@ import java.util.ArrayList;
 public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_RecyclerViewAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Tweet> listaTweets;
-    private añadirTweets listener;
     public boolean formProfile_page;
+    private boolean ordenAscendente = true;
+
 
     public Tweet_RecyclerViewAdapter(Context context, ArrayList<Tweet> listaTweets) {
         this.context = context;
@@ -39,11 +40,14 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recicler_view_row, parent, false);
         return new Tweet_RecyclerViewAdapter.MyViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Tweet tweet = listaTweets.get(position);
+        int adjustedPosition = ordenAscendente ? position : getItemCount() - 1 - position;
+
+        Tweet tweet = listaTweets.get(adjustedPosition);
         holder.idView.setText(tweet.getIdUsuario() + "");
         holder.imagenPerfil.setImageResource(tweet.getImagenPerfil());
         holder.nombreUsuario.setText(tweet.getNombre());
@@ -67,6 +71,12 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
             });
         }
     }
+    public void cambiarOrden() {
+        ordenAscendente = !ordenAscendente;
+        notifyDataSetChanged();
+    }
+
+
 
     @Override
     public int getItemCount() {
@@ -93,6 +103,8 @@ public class Tweet_RecyclerViewAdapter extends RecyclerView.Adapter<Tweet_Recycl
             fechaTweetView = itemView.findViewById(R.id.fechaTweetView);
             botonLike = itemView.findViewById(R.id.like);
         }
+
+
     }
 
     public ArrayList<Tweet> getListaTweetsRecyclerView() {

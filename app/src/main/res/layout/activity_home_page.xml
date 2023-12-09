@@ -45,6 +45,13 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/botonCambiarOrdenHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Ascendente" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tweet_list_recycler"
             android:layout_width="match_parent"

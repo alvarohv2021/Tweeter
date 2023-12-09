@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 
@@ -22,6 +21,7 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
     private MaterialCardView perfilCabezeraView;
     private ArrayList<Tweet> listaTweets;
     private RecyclerView recyclerView;
+    private Button botonCambiarOrden;
 
 
     @Override
@@ -32,19 +32,32 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         generacionListaTweets = new GeneracionListaTweets();
 
 
-        if (getContenidoIntentPerfil() == null){
+        if (getContenidoIntentPerfil() == null) {
             listaTweets = generacionListaTweets.generarListaTweets();
-        }else {
+        } else {
             listaTweets = getContenidoIntentPerfil();
         }
 
         recyclerView = findViewById(R.id.tweet_list_recycler);
         tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), listaTweets);
 
+
+        //Cambiamos la lsita de tweets en orden ascendente o descendente-------------------------------
+        botonCambiarOrden = findViewById(R.id.botonCambiarOrdenHome);
+        botonCambiarOrden.setOnClickListener(v -> {
+            // Llama al método en el adaptador para cambiar el orden
+            tweet_recyclerViewAdapter.cambiarOrden();
+            if (botonCambiarOrden.getText().toString().equals("Ascendente")) {
+                botonCambiarOrden.setText("Descendente");
+            } else {
+                botonCambiarOrden.setText("Ascendente");
+            }
+        });
+
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Esto envia el id del usuario para añadirlo al nuevo tweet
+        //Esto envia el id del usuario para añadirlo al nuevo tweet-----------------------------------
         añadirTweet = findViewById(R.id.añadirTweetButton);
         añadirTweet.setOnClickListener(v -> {
             idUsuario = getContenidoIntentRegister();

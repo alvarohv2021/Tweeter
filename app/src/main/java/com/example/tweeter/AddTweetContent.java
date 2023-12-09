@@ -12,7 +12,9 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class AddTweetContent extends AppCompatDialogFragment {
 
@@ -43,9 +45,11 @@ public class AddTweetContent extends AppCompatDialogFragment {
             String contenidoTweet = viewContenidoTweet.getText().toString();
 
             //Fecha de creación del Tweet
-            java.util.Date fechaAhora = java.util.Date.from(LocalDateTime.now().atZone(java.time.ZoneId.systemDefault()).toInstant());
+            Date fechaAhora = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String fechaAhoraFormateada = sdf.format(fechaAhora);
 
-            Tweet tweet = new Tweet(this.idTweet, this.idUsuario, "Alvaro", contenidoTweet, fechaAhora, R.drawable.perfil0);
+            Tweet tweet = new Tweet(this.idTweet, this.idUsuario, "Alvaro", contenidoTweet, fechaAhoraFormateada, R.drawable.perfil0);
             añadirTweetARecyclerView.añadirTweetARecyclerView(tweet);
         });
 

@@ -1,5 +1,6 @@
 package com.example.tweeter;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,8 +13,9 @@ public class GeneracionListaTweets {
     public ArrayList<Tweet> generarListaTweets() {
         for (int i = 0; i < 20; i++) {
             int idUsuario = i % 4;  // ID de usuario cíclico entre 0, 1, 2 y 3
-            LocalDateTime fechaTweet = LocalDateTime.now();
-            Date fecha = java.util.Date.from(fechaTweet.atZone(java.time.ZoneId.systemDefault()).toInstant());
+            Date fecha = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String fechaFormateada = sdf.format(fecha);
 
             switch (idUsuario) {
                 case 0:
@@ -37,7 +39,7 @@ public class GeneracionListaTweets {
                     imagenPerfil = R.drawable.perfil_default;
             }
 
-            listaTweets.add(new Tweet(i, idUsuario, nombreUsuario, "Este es el Tweet #" + i, fecha, imagenPerfil));
+            listaTweets.add(new Tweet(i, idUsuario, nombreUsuario, "Este es el Tweet #" + i, fechaFormateada, imagenPerfil));
         }
         return listaTweets;
     }

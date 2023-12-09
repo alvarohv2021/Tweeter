@@ -8,10 +8,10 @@ public class Tweet implements Serializable {
     private int idUsuario;
     private String nombreUsuario;
     private String contenido;
-    private Date fecha;
+    private String fecha;
     private int imagen;
 
-    public Tweet(int idTweet, int idUsuario, String nombreUsuario, String contenido, Date fecha, int imagen) {
+    public Tweet(int idTweet, int idUsuario, String nombreUsuario, String contenido, String fecha, int imagen) {
 
         this.idTweet = idTweet;
         this.idUsuario = idUsuario;
@@ -40,7 +40,7 @@ public class Tweet implements Serializable {
         return this.contenido;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return this.fecha;
     }
 

@@ -42,6 +42,12 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/botonCambiarOrdenPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ascendente" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewProfilePage"
             android:layout_width="match_parent"

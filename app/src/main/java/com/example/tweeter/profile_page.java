@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 
@@ -17,6 +16,8 @@ public class profile_page extends AppCompatActivity {
     private ImageView imagenCabezeraProfilePage;
     private ArrayList<Tweet> listaTweets;
     private ArrayList<Tweet> tweetsUsuario;
+    private Button botonCambiarOrden;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,17 @@ public class profile_page extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewProfilePage);
         tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), tweetsUsuario, true);
 
+        botonCambiarOrden = findViewById(R.id.botonCambiarOrdenPerfil);
+        botonCambiarOrden.setOnClickListener(v -> {
+            // Llama al método en el adaptador para cambiar el orden
+            tweet_recyclerViewAdapter.cambiarOrden();
+            if (botonCambiarOrden.getText().toString().equals("Ascendente")) {
+                botonCambiarOrden.setText("Descendente");
+            } else {
+                botonCambiarOrden.setText("Ascendente");
+            }
+
+        });
         recyclerView.setAdapter(tweet_recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
