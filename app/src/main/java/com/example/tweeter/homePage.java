@@ -74,19 +74,6 @@ public class homePage extends AppCompatActivity implements AñadirTweetARecycler
         });
     }
 
-    /*public void onResume() {
-        super.onResume();
-        //Esto detecta si se le ha pasado una lista de Tweets por el perfil, y si es el caso, DEBERIA mostrarla
-        listaTweets = getContenidoIntentPerfil();
-
-        tweet_recyclerViewAdapter = new Tweet_RecyclerViewAdapter(recyclerView.getContext(), listaTweets);
-
-        recyclerView.setAdapter(tweet_recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-    }*/
-
     @Override
     public void añadirTweetARecyclerView(Tweet tweet) {
         generacionListaTweets.addTweet(tweet);

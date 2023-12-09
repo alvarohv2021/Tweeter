@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //Si ha iniciado con exito, hace un intent a la página principal y envia el usuario
                             Intent intent = new Intent(MainActivity.this, homePage.class);
-                            intent.putExtra("usuario", 0+"");
+                            intent.putExtra("usuario", 0);
                             startActivity(intent);
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

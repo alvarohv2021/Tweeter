@@ -44,18 +44,6 @@ public class GeneracionListaTweets {
         return listaTweets;
     }
 
-    public void remove(int position) {
-        listaTweets.remove(position);
-    }
-
-    public int getSize() {
-        return listaTweets.size();
-    }
-
-    public Tweet getTwit(int position) {
-        return listaTweets.get(position);
-    }
-
     public void addTweet(Tweet tweet) {
         listaTweets.add(tweet);
     }
